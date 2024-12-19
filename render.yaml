@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: automarket
+    env: static
+    buildCommand: npm install && npm run build
+    staticPublishPath: ./out
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NEXT_PUBLIC_SUPABASE_URL
+        value: https://igbpxesaulnzqaiqdjol.supabase.co
+      - key: NEXT_PUBLIC_SUPABASE_ANON_KEY
+        value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlnYnB4ZXNhdWxuenFhaXFkam9sIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQyOTEyMzYsImV4cCI6MjA0OTg2NzIzNn0.G6NsqYzhAgn6EurprNJhYgUGbec6U3GCxKA1UBMcqJo
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    headers:
+      - path: /*
+        name: Cache-Control
+        value: public, max-age=0, must-revalidate
